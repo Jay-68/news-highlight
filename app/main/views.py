@@ -10,23 +10,19 @@ def index():
     '''
     view root page that returns the index page and its data
     '''
-    entertainment = get_sources('entertainment')
-    technology = get_sources('technology')
-    business = get_sources('business')
-    sports = get_sources('sports')
-    print(entertainment[0].name)
-    # title = get_sources('News Highlights')
+    articles = get_articles()
+    title = 'News Highlights'
 
 
-    return render_template('index.html', entertainment=entertainment, technology=technology, business=business, sports=sports)
+    return render_template('index.html', title=title,articles=articles)
 
 
 @main.route('/sources/<id>')
-def articles(id):
+def articles():
     '''
     routing to article pages
     '''
-    articles = get_articles(id)
+    articles = get_articles()
     title = 'Latest articles'
 
     return render_template('articles.html', title=title, articles=articles)

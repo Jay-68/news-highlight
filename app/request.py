@@ -1,33 +1,33 @@
 import urllib.request
 import json
+from config import Config
+# import json
 from .models import Sources, Articles
 from datetime import datetime
 
 api_key = None
+
 base_url = None
 Articles_url = None
+api_key = Config.NEWS_API_KEY
+base_url = Config.NEWS_SOURCES_BASE_URL
+base_url_articles = Config.ARTICLES_BASE_URL
+get_sources_url = base_url.format(base_url,api_key)
+    # print(api_key)
+    # print(base_url)
 
 
-def configure_request(app):
-    global api_key, base_url, base_url_articles
-    api_key = app.config['NEWS_API_KEY']
-    base_url = app.config['NEWS_SOURCES_BASE_URL']
-    base_url_articles = app.config['ARTICLES_BASE_URL']
-
-    print(api_key)
-    print(base_url)
-
-
-def get_sources(category):
+def get_sources():
     '''
     Function to get the json response to the provided url request
     '''
-    get_sources_url = base_url.format(category, api_key)
+    
     print(get_sources_url)
 
     with urllib.request.urlopen(get_sources_url) as url:
         get_sources_data = url.read()
         get_sources_response = json.loads(get_sources_data)
+
         sources_results = None
         if get_sources_response['sources']:
             sources_results_list = get_sources_response['sources']
@@ -56,23 +56,21 @@ def process_sources(sources_list):
     return sources_results
 
 
-def get_articles(id):
+def get_articles():
     '''
     function provides json response to the request
     '''
-    get_articles_url = base_url_articles.format(id, api_key)
+    # get_articles_url = base_url_articles.format()
 
-    with urllib.request.urlopen(get_articles_url) as url:
-        get_articles_data = url.read()
-        get_articles_response = json.loads(get_articles_data)
+    with urllib.request.urlopen(base_url_articles + api_key) as url:
+        articles_results = json.loads(url.read())
 
-        articles_results = None
+        articles_object = None
 
-        if get_articles_response['articles']:
-            articles_results_list = get_articles_response['articles']
-            articles_results = process_articles(articles_results_list)
+        if articles_results['articles']:
+            articles_object = process_articles(articles_results['articles'])
 
-    return articles_results
+    return articles_object
 
 
 def process_articles(articles_list):
@@ -85,10 +83,10 @@ def process_articles(articles_list):
         id = article_item.get('id')
         author = article_item.get('author')
         title = article_item.get('title')
-        description = articles_list.get('description')
-        url = articles_list.get('url')
-        image = articles_list.get('urlToImage')
-        date = articles_list.get('publishedAt')
+        description = article_item.get('description')
+        url = article_item.get('url')
+        image = article_item.get('urlToImage')
+        date = article_item.get('publishedAt')
 
         if image:
             articles_result = Articles(
