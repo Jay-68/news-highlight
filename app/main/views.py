@@ -1,23 +1,21 @@
 from flask import render_template, request, redirect, url_for
-# import sys
 from . import main
 from ..request import get_sources, get_articles
 from ..models import Sources
 
 # app views
-@main.route('/')
+@main.route('/news')
 def index():
     '''
     view root page that returns the index page and its data
     '''
-    articles = get_articles()
+    articles = get_sources()
     title = 'News Highlights'
 
+    return render_template('index.html', title=title, articles=articles)
 
-    return render_template('index.html', title=title,articles=articles)
 
-
-@main.route('/sources/<id>')
+@main.route('/sources/')
 def articles():
     '''
     routing to article pages
