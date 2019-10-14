@@ -11,7 +11,7 @@ def index():
     '''
     sources = get_sources()
     title = 'News Highlights'
-    print(sources)
+   
     return render_template('index.html', title=title,sources=sources)
 
 
@@ -21,6 +21,7 @@ def articles():
     routing to article pages
     '''
     articles = get_articles()
+    print(articles)
     title = 'Latest articles'
 
     return render_template('articles.html', title=title, articles=articles)

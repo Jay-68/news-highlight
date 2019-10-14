@@ -17,7 +17,7 @@ class Articles:
     class to define new instances of articles
     '''
 
-    def __init__(self, id, author, title, description, url, image, date):
+    def __init__(self, author, title, description, url, image, date):
         self.id = id
         self.author = author
         self.title = title
