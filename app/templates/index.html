@@ -2,15 +2,19 @@
 
 {%block content%}
 
-<div class="container">
+{% block styles%} {{super()}}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+  integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+{% endblock%}
+<div class="container mt-5 pt-5">
   <!-- Top headlines section -->
-  <h3>Top Sources</h3>
+  <h3 class="text-center font-weight-bold">Top Sources</h3>
   {% for source in sources | batch(4) %}
   <div class="row">
     {% for source in source %}
     <div class="col-md-3">
-      <div class="card text-center border-secondary mb-3">
-        <p {{source.name}}>
+      <div class="card text-center text-white bg-secondary mb-3">
+        <p><a href="{{source.url}}"></a>
         </p>
         <div class="card-body">
           <div class="card-title"><a href="{{source.url}}" target="_blank">{{source.name}}
