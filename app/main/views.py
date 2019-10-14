@@ -1,5 +1,6 @@
 from flask import render_template, request, redirect, url_for
-from app import main
+# import sys
+from .import main
 from ..request import get_sources, get_articles
 from ..models import Sources
 
@@ -13,8 +14,9 @@ def index():
     technology = get_sources('technology')
     business = get_sources('business')
     sports = get_sources('sports')
-    # print(entertainment[0].name)
-    title = 'News Highlights'
+    print(entertainment[0].name)
+    # title = get_sources('News Highlights')
+
 
     return render_template('index.html', entertainment=entertainment, technology=technology, business=business, sports=sports)
 
