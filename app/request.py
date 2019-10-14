@@ -22,9 +22,8 @@ def get_sources():
     Function to get the json response to the provided url request
     '''
 
-    print(get_sources_url)
 
-    with urllib.request.urlopen(get_sources_url) as url:
+    with urllib.request.urlopen(base_url+api_key) as url:
         get_sources_data = url.read()
         get_sources_response = json.loads(get_sources_data)
 
@@ -52,7 +51,7 @@ def process_sources(sources_list):
         url = source_item.get('url')
         category = source_item.get('category')
         country = source_item.get('country')
-        sources_object = Sources(id, name, description, url, category, country)
+        sources_object = Sources(id, name, description, url,category,country)
         sources_results.append(sources_object)
 
     return sources_results

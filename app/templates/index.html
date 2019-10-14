@@ -1,30 +1,27 @@
-{% extends 'base.html'%}
-{% import 'macros.html' as macro%}
+{%extends 'base.html'%}
 
-<!--Content block-->
-{% block content %}
+{%block content%}
 
 <div class="container">
-  <!--entertainment News-->
-  <h3>Entertainment News</h3>
-  <hr>
-  {{ macro.displaySourceList(entertainment)}}
-
-  <!-- Technology news-->
-  <h3>Technology News</h3>
-  <hr>
-  {{ macro.displaySourceList(technology)}}
-
-  <!-- Business News -->
-  <h3> Business News</h3>
-  <hr>
-  {{ macro.displaySourceList(business)}}
-
-  <!--Sports News-->
-  <h3>Sports News</h3>
-  <hr>
-  {{macro.displaySourceList(sports)}}
-
+  <!-- Top headlines section -->
+  <h3>Top Headlines</h3>
+  {% for source in sources | batch(4) %}
+  <div class="row">
+    {% for source in source %}
+    <div class="col-md-3">
+      <div class="card text-center border-secondary mb-3">
+        <p {{source.name}}>
+        </p>
+        <div class="card-body">
+          <div class="card-title"><a href="{{source.url}}" target="_blank">{{source.name}}
+            </a></div>
+          <p class="card-text">{{source.description|truncate(100)}}</p>
+        </div>
+      </div>
+    </div>
+    {%endfor%}
+  </div>
+  {%endfor%}
 </div>
 
-{% endblock%}
+{% endblock %}

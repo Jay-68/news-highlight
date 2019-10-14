@@ -4,18 +4,18 @@ from ..request import get_sources, get_articles
 from ..models import Sources
 
 # app views
-@main.route('/news')
+@main.route('/')
 def index():
     '''
     view root page that returns the index page and its data
     '''
-    articles = get_sources()
+    sources = get_sources()
     title = 'News Highlights'
+    print(sources)
+    return render_template('index.html', title=title,sources=sources)
 
-    return render_template('index.html', title=title, articles=articles)
 
-
-@main.route('/sources/')
+@main.route('/sources')
 def articles():
     '''
     routing to article pages
