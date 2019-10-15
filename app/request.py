@@ -9,7 +9,7 @@ api_key = None
 
 base_url = None
 Articles_url = None
-api_key = Config.NEWS_API_KEY
+api_key = Config.NEW_API_KEY
 base_url = Config.NEWS_SOURCES_BASE_URL
 base_url_articles = Config.ARTICLES_BASE_URL
 get_sources_url = base_url.format(base_url, api_key)
