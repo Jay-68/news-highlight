@@ -9,7 +9,7 @@ api_key = None
 
 base_url = None
 Articles_url = None
-api_key = Config.NEW_API_KEY
+api_key = Config.NEWS_API_KEY
 base_url = Config.NEWS_SOURCES_BASE_URL
 base_url_articles = Config.ARTICLES_BASE_URL
 get_sources_url = base_url.format(base_url, api_key)
@@ -21,7 +21,6 @@ def get_sources():
     '''
     Function to get the json response to the provided url request
     '''
-
 
     with urllib.request.urlopen(base_url+api_key) as url:
         get_sources_data = url.read()
@@ -51,7 +50,7 @@ def process_sources(sources_list):
         url = source_item.get('url')
         category = source_item.get('category')
         country = source_item.get('country')
-        sources_object = Sources(id, name, description, url,category,country)
+        sources_object = Sources(id, name, description, url, category, country)
         sources_results.append(sources_object)
 
     return sources_results
@@ -90,7 +89,7 @@ def process_articles(articles_list):
 
         if image:
             articles_result = Articles(
-                 author, title, description, url, image, date)
+                author, title, description, url, image, date)
             articles_object.append(articles_result)
 
     return articles_object
