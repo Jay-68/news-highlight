@@ -21,7 +21,7 @@ def articles():
     routing to article pages
     '''
     articles = get_articles()
-    print(articles)
+    # print(articles)
     title = 'Latest articles'
 
     return render_template('articles.html', title=title, articles=articles)

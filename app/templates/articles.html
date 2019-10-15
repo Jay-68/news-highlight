@@ -14,7 +14,7 @@
   <div class="row">
     {%for article in articles%}
     <div class="col-md-3">
-      <div class="card text-center text-dark bg-secondary mb-3">
+      <div class="card text-center text-dark bg-dark mb-3">
         <img src="{{article.image}}" alt="" class="img-responsive card-img-top">
         <div class="card-body">
           <div class="card-title"><a href="{{article.url}}" target="_blank">
@@ -29,5 +29,23 @@
   </div>
 
 </div>
+
+<style>
+  .card-text {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 15px;
+    color: white;
+  }
+
+  a {
+    color: greenyellow;
+    font-size: 15px;
+    text-decoration: none;
+  }
+
+  a:hover {
+    text-decoration: none;
+  }
+</style>
 
 {%endblock%}
